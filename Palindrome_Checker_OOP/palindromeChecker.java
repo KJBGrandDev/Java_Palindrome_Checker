@@ -4,8 +4,6 @@ import java.util.ArrayList;
 public class palindromeChecker {
     private String input;
     private String isPalindrome;
-    private String stringOriginalInput;
-    private String stringReverseInput;
     private ArrayList<String> originalInput;
     private ArrayList<String> reverseInput;
 

@@ -1,7 +1,6 @@
 package Palindrome_Checker_OOP;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class filePalindromeChecker {
@@ -11,79 +10,94 @@ public class filePalindromeChecker {
         this.fileName = fileName;
     }
 
-    public boolean fileEmpty() {
-        try {
-            File file = new File(fileName);
-            Scanner fileReader = new Scanner(file);
+    private InputStream getFileStream() {
+        // First try to load as resource (works in JAR)
+        InputStream is = getClass().getResourceAsStream("/File/" + fileName);
+        if (is != null) {
+            return is;
+        }
+        return null;
+    }
 
+    public boolean isFileEmpty(InputStream is) {
+        try (Scanner fileReader = new Scanner(is)) {
             if (!fileReader.hasNextLine()) {
-                System.out.println("This file is currently empty");
                 System.out.println("\n-------------------------------");
-                System.out.println("File checker terminates..");
+                System.out.println("File is currently empty");
                 System.out.println("-------------------------------\n");
                 return true;
-            } else {
-                System.out.println("Checking file contents: \n");
             }
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
+            System.out.println("\nChecking file contents:");
+            return false;
         }
-        return false;
     }
-    public void checkAnotherFile(){
+
+    public void checkAnotherFile() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Would you like to scan an another file? [Y/N]");
-        System.out.println("Your choice: ");
+        System.out.println("\nWould you like to scan another file? [Y/N]");
+        System.out.print("Your choice: ");
         String input = scanner.nextLine().toLowerCase();
 
-        switch (input){
-            case "y":{
-                System.out.println("\nInput the filename: ");
+        switch (input) {
+            case "y":
+                System.out.print("\nEnter the filename: ");
                 this.fileName = scanner.nextLine();
                 palindromeChecker();
                 break;
-            }
-            case "n":{
+            case "n":
                 System.out.println("\n-------------------------------");
-                System.out.println("File checker terminates..");
+                System.out.println("File checker terminated");
                 System.out.println("-------------------------------\n");
                 break;
-            }
-            default:{
+            default:
                 System.out.println("\n-------------------------------");
-                System.out.println("Invalid Choice\nFile checker terminates..");
+                System.out.println("Invalid choice. File checker terminated");
                 System.out.println("-------------------------------\n");
-            }
         }
     }
 
-    public void palindromeChecker(){
-        try{
-            File file = new File(fileName);
-            Scanner fileReader = new Scanner(file);
+    public void palindromeChecker() {
+        InputStream is = getFileStream();
 
-            if(fileEmpty()){
-                checkAnotherFile();
-            } else {
-                while (fileReader.hasNextLine()){
-                    String nextLine = fileReader.nextLine();
-                    palindromeChecker checker = new palindromeChecker(nextLine);
-                    System.out.println(nextLine + " = " + checker);
-                }
-
-                System.out.println("\n-------------------------------");
-                System.out.println("The program has fully scanned the file");
-                System.out.println("No more lines had been detected");
-                System.out.println("-------------------------------\n");
-
-                checkAnotherFile();
-            }
-        }catch(FileNotFoundException e){
+        if (is == null) {
             System.out.println("\n-------------------------------");
-            System.out.println("File not found! Please try again");
+            System.out.println("Error: File '" + fileName + "' not found!");
+            System.out.println("Please follow this checklist:");
+            System.out.println("1. File must exists in the 'File' folder");
+            System.out.println("2. You misspelled the filename");
+            System.out.println("3. File has .txt extension if needed");
             System.out.println("-------------------------------\n");
-        }catch (Exception e){
-            System.out.println("Error: " + e);
+            checkAnotherFile();
+            return;
         }
+
+        if (isFileEmpty(is)) {
+            checkAnotherFile();
+            return;
+        }
+
+
+        try (InputStream newIs = getFileStream();
+             Scanner fileReader = new Scanner(newIs)) {
+
+            System.out.println("\nResults:");
+            while (fileReader.hasNextLine()) {
+                String line = fileReader.nextLine();
+                if (!line.trim().isEmpty()) {
+                    palindromeChecker checker = new palindromeChecker(line);
+                    System.out.println(line + " = " + checker);
+                }
+            }
+
+            System.out.println("\n-------------------------------");
+            System.out.println("File scan completed");
+            System.out.println("-------------------------------\n");
+
+        } catch (Exception e) {
+            System.out.println("\n-------------------------------");
+            System.out.println("Error reading file: " + e.getMessage());
+            System.out.println("-------------------------------\n");
+        }
+        checkAnotherFile();
     }
 }
