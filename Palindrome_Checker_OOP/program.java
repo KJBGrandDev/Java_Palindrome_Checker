@@ -33,9 +33,13 @@ public class program {
                                 System.out.println("-------------------------------\n");
                                 break;
                             }
-
                             palindromeChecker checker = new palindromeChecker(wordInput);
-                            System.out.println(checker);
+
+                            if(wordInput.matches("[0-9]")){
+                                System.out.println(checker);
+                            } else {
+                                System.out.println("Answer: " + checker);
+                            }
                         }
                         break;
                     }

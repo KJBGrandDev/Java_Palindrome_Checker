@@ -34,26 +34,20 @@ public class palindromeChecker {
     }
 
     public void isPalindrome() {
-
-        try {
-            if (input.matches("[0-9]*")) {
-                isPalindrome = "Error: Input is an integer";
-                return;
-            }
-
+        if(input.matches("[0-9]*")){
+            isPalindrome = "Error: Input is an integer";
+        } else {
             inputRegexChecker();
             reverseRegexChecker();
 
             if ((originalInput.toString()).equalsIgnoreCase(reverseInput.toString())) {
-                isPalindrome = "Answer: is a palindrome";
+                isPalindrome = "is a palindrome";
             } else {
-                isPalindrome = "Answer : is NOT a palindrome";
+                isPalindrome = "is NOT a palindrome";
             }
-
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
         }
     }
+
     @Override
     public String toString() {
         isPalindrome();
