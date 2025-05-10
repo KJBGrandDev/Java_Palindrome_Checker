@@ -35,7 +35,7 @@ public class program {
                             }
 
                             palindromeChecker checker = new palindromeChecker(wordInput);
-                            System.out.println("Answer: " + checker);
+                            System.out.println(checker);
                         }
                         break;
                     }
