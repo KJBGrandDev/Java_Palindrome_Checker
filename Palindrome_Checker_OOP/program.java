@@ -12,7 +12,7 @@ public class program {
             System.out.println("1. Check a word/phrase");
             System.out.println("2. Check an entire file");
             System.out.println("3. Exit\n");
-            System.out.println("Your choice: ");
+            System.out.println("Select an option [1-3]: ");
             String input = scanner.nextLine();
 
             try{
@@ -23,12 +23,14 @@ public class program {
                 switch (inputTrial){
                     case 1:{
                         while (true){
-                            System.out.println("\nInput a word or phrase, giving a blank space will end the program: ");
+                            System.out.println("\nInput a word or phrase (press Enter with no text to end): ");
                             String wordInput = scanner.nextLine();
 
                             if(wordInput.isEmpty()){
+                                System.out.println("-------------------------------");
                                 System.out.println("You didn't give a word/phrase");
-                                System.out.println("Word checker terminates..\n");
+                                System.out.println("Word checker terminates..");
+                                System.out.println("-------------------------------\n");
                                 break;
                             }
 
@@ -47,8 +49,10 @@ public class program {
                         break;
                     }
                     case 3:{
-                        System.out.println("\nProgram will now terminate..");
+                        System.out.println("\n-------------------------------");
+                        System.out.println("Program will now terminate..");
                         System.out.println("Goodbye!");
+                        System.out.println("-------------------------------");
                         palindromeSystem = false;
                         break;
                     }

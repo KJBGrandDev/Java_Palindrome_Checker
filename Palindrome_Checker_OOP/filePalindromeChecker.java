@@ -27,15 +27,16 @@ public class filePalindromeChecker {
                 System.out.println("-------------------------------\n");
                 return true;
             }
-            System.out.println("\nChecking file contents:");
+            System.out.println("-------------------------------");
+            System.out.println("Checking file contents:");
             return false;
         }
     }
 
     public void checkAnotherFile() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\nWould you like to scan another file? [Y/N]");
-        System.out.print("Your choice: ");
+        System.out.println("\nWould you like to scan another file?");
+        System.out.print("Pick an option [Y/N]: ");
         String input = scanner.nextLine().toLowerCase();
 
         switch (input) {
@@ -60,13 +61,13 @@ public class filePalindromeChecker {
         InputStream is = getFileStream();
 
         if (is == null) {
-            System.out.println("\n-------------------------------");
+            System.out.println("-------------------------------");
             System.out.println("Error: File '" + fileName + "' not found!");
             System.out.println("Please follow this checklist:");
             System.out.println("1. File must exists in the 'File' folder");
-            System.out.println("2. You misspelled the filename");
-            System.out.println("3. File has .txt extension if needed");
-            System.out.println("-------------------------------\n");
+            System.out.println("2. You might misspelled the filename");
+            System.out.println("3. File has .txt extension if needed ex. [file.txt]");
+            System.out.println("-------------------------------");
             checkAnotherFile();
             return;
         }
@@ -88,10 +89,10 @@ public class filePalindromeChecker {
                     System.out.println(line + " = " + checker);
                 }
             }
-
+            System.out.println("-------------------------------");
             System.out.println("\n-------------------------------");
             System.out.println("File scan completed");
-            System.out.println("-------------------------------\n");
+            System.out.println("-------------------------------");
 
         } catch (Exception e) {
             System.out.println("\n-------------------------------");
