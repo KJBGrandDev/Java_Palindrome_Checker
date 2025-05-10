@@ -42,7 +42,6 @@ public class program {
                     case 2:{
                         System.out.println("\nInput a file name: ");
                         String fileNameInput = scanner.nextLine();
-                        System.out.println();
 
                         filePalindromeChecker checker = new filePalindromeChecker(fileNameInput);
                         checker.palindromeChecker();

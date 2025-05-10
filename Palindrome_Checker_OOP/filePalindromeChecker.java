@@ -1,6 +1,6 @@
 package Palindrome_Checker_OOP;
 
-import java.io.InputStream;
+import java.io.*;
 import java.util.Scanner;
 
 public class filePalindromeChecker {
@@ -20,16 +20,19 @@ public class filePalindromeChecker {
     }
 
     public boolean isFileEmpty(InputStream is) {
-        try (Scanner fileReader = new Scanner(is)) {
-            if (!fileReader.hasNextLine()) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+            if (br.readLine() == null) {
                 System.out.println("\n-------------------------------");
-                System.out.println("File is currently empty");
-                System.out.println("-------------------------------\n");
+                System.out.println("The file is empty.");
+                System.out.println("-------------------------------");
                 return true;
             }
             System.out.println("-------------------------------");
-            System.out.println("Checking file contents:");
+            System.out.println("Checking file contents..");
+            System.out.println("\nResults:");
             return false;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -77,28 +80,27 @@ public class filePalindromeChecker {
             return;
         }
 
+        try(InputStream newIs = getClass().getResourceAsStream("/File/" + fileName)) {
+            assert newIs != null;
+            BufferedReader fileReader = new BufferedReader(new InputStreamReader(newIs));
 
-        try (InputStream newIs = getFileStream();
-             Scanner fileReader = new Scanner(newIs)) {
+            while (fileReader.readLine() != null) {
+                String line = fileReader.readLine();
 
-            System.out.println("\nResults:");
-            while (fileReader.hasNextLine()) {
-                String line = fileReader.nextLine();
-                if (!line.trim().isEmpty()) {
-                    palindromeChecker checker = new palindromeChecker(line);
-                    System.out.println(line + " = " + checker);
-                }
+                palindromeChecker checker = new palindromeChecker(line);
+                System.out.println(line + " = " + checker);
             }
+
             System.out.println("-------------------------------");
             System.out.println("\n-------------------------------");
             System.out.println("File scan completed");
             System.out.println("-------------------------------");
 
+            checkAnotherFile();
         } catch (Exception e) {
             System.out.println("\n-------------------------------");
             System.out.println("Error reading file: " + e.getMessage());
             System.out.println("-------------------------------\n");
         }
-        checkAnotherFile();
     }
 }
