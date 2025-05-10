@@ -2,19 +2,19 @@ package Palindrome_Checker_OOP;
 
 import java.util.ArrayList;
 public class palindromeChecker {
-    private String input;
+    private final String input;
     private String isPalindrome;
-    private ArrayList<String> originalInput;
-    private ArrayList<String> reverseInput;
+    private final ArrayList<String> originalInput;
+    private final ArrayList<String> reverseInput;
 
     public palindromeChecker(String input){
-        this.input = input.toLowerCase();
+        this.input = input;
         this.originalInput = new ArrayList<>();
         this.reverseInput = new ArrayList<>();
     }
 
     public void inputRegexChecker(){
-        String regEx = "^[a-z]+$";
+        String regEx = "^[a-zA-Z]+$";
 
         for(int i = 0; i < input.length(); i++){
             if(String.valueOf(input.charAt(i)).matches(regEx)){
@@ -24,7 +24,7 @@ public class palindromeChecker {
     }
 
     public void reverseRegexChecker(){
-        String regEx = "^[a-z]+$";
+        String regEx = "^[a-zA-Z]+$";
 
         for(int i = input.length() - 1; i >= 0; i--){
             if(String.valueOf(input.charAt(i)).matches(regEx)){
@@ -37,15 +37,10 @@ public class palindromeChecker {
         inputRegexChecker();
         reverseRegexChecker();
 
-        if(originalInput.isEmpty()){
-            System.out.println("An empty space");
-            return;
-        }
-
-        if(originalInput.equals(reverseInput)){
-            isPalindrome = "is a palindrome";
+        if((originalInput.toString()).equalsIgnoreCase(reverseInput.toString())){
+            isPalindrome = "[is a palindrome]";
         } else {
-            isPalindrome = "is NOT a palindrome";
+            isPalindrome = "[is NOT a palindrome]";
         }
     }
 

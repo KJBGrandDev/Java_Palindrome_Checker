@@ -27,9 +27,11 @@ public class filePalindromeChecker {
                 System.out.println("-------------------------------");
                 return true;
             }
-            System.out.println("-------------------------------");
+            System.out.println("\n-------------------------------");
             System.out.println("Checking file contents..");
-            System.out.println("\nResults:");
+            System.out.println("-------------------------------\n");
+            System.out.println("-------------------------------");
+            System.out.println("Results:");
             return false;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -84,11 +86,12 @@ public class filePalindromeChecker {
             assert newIs != null;
             BufferedReader fileReader = new BufferedReader(new InputStreamReader(newIs));
 
-            while (fileReader.readLine() != null) {
-                String line = fileReader.readLine();
-
-                palindromeChecker checker = new palindromeChecker(line);
-                System.out.println(line + " = " + checker);
+            String line;
+            while ((line = fileReader.readLine()) != null) {
+                if(!line.trim().isEmpty()){
+                    palindromeChecker checker = new palindromeChecker(line);
+                    System.out.println(line + " = " + checker);
+                }
             }
 
             System.out.println("-------------------------------");
