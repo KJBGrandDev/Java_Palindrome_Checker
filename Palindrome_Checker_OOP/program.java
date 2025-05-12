@@ -35,7 +35,7 @@ public class program {
                             }
                             palindromeChecker checker = new palindromeChecker(wordInput);
 
-                            if(wordInput.matches("[0-9]")){
+                            if(wordInput.matches("[0-9]") || wordInput.matches("^[^a-zA-Z]+$")){
                                 System.out.println(checker);
                             } else {
                                 System.out.println("Answer: " + checker);

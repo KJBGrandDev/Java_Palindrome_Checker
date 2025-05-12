@@ -35,16 +35,22 @@ public class palindromeChecker {
 
     public void isPalindrome() {
         if(input.matches("[0-9]*")){
-            isPalindrome = "Error: Input is an integer";
-        } else {
-            inputRegexChecker();
-            reverseRegexChecker();
+            isPalindrome = "Error: Input contains only numbers";
+            return;
+        }
 
-            if ((originalInput.toString()).equalsIgnoreCase(reverseInput.toString())) {
-                isPalindrome = "is a palindrome";
-            } else {
-                isPalindrome = "is NOT a palindrome";
-            }
+        if(input.matches("^[^a-zA-Z]+$")){
+            isPalindrome = "Error: Input must contain at least one letter";
+            return;
+        }
+
+        inputRegexChecker();
+        reverseRegexChecker();
+
+        if ((originalInput.toString()).equalsIgnoreCase(reverseInput.toString())) {
+            isPalindrome = "is a palindrome";
+        } else {
+            isPalindrome = "is NOT a palindrome";
         }
     }
 
