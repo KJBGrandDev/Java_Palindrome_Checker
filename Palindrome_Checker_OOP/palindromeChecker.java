@@ -34,19 +34,34 @@ public class palindromeChecker {
     }
 
     public void isPalindrome() {
-        if(input.matches("[0-9]*")){
-            isPalindrome = "Error: Input contains only numbers";
-            return;
-        }
-
-        if(input.matches("^[^a-zA-Z]+$")){
+        //This will return an "error" if the input only contains numbers
+        //This is just a regEx example of manually checking input based on its data types and can be erased due to the more robust 2nd regEx checker in line 45
+        if(input.matches("[0-9]+$")){
             isPalindrome = "Error: Input must contain at least one letter";
             return;
         }
 
+        //This if-statement will return an "error" if the input does not contain an alphabet from "a to z or A to Z" (case-sensitive checker)
+        if(input.matches("^[^a-zA-Z]+$")){
+            isPalindrome = "Error: Input must contain at least two letters";
+            return;
+        }
+
+        /*Based on research, the shortest palindrome is "aa"
+        This will return an "error" if the "input" is less than two letters
+        */
+        if(input.length() == 1){
+            isPalindrome = "Error: Input must contain at least two letters";
+            return;
+        }
+        //Calls and run inputRegExChecker() method.. Check line 16
         inputRegexChecker();
+
+        //Calls and run reverseRegExChecker() method.. Check line 26
         reverseRegexChecker();
 
+        //originalInput are then compared to the reverseInput.
+        //equalsIgnoreCase makes small or capital letters have the same value as long as they are the "same letter/alphabet"
         if ((originalInput.toString()).equalsIgnoreCase(reverseInput.toString())) {
             isPalindrome = "is a palindrome";
         } else {
