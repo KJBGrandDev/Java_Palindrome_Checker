@@ -106,4 +106,67 @@ public class filePalindromeChecker {
             System.out.println("-------------------------------\n");
         }
     }
+
+    public void palindromeList() {
+        File file = new File(fileName);
+
+        if (!file.exists()) {
+            System.out.println("Error: File not found -> " + file.getAbsolutePath());
+            return;
+        }
+
+        try (Scanner scanner = new Scanner(file)) {
+
+            System.out.println("\n-------------------------------");
+            System.out.println("Checking file contents..");
+            System.out.println("-------------------------------\n");
+            boolean isEmpty = true;
+            while (scanner.hasNextLine()) {
+                String nextLine = scanner.nextLine();
+                if (!nextLine.trim().isEmpty()) {
+                    System.out.println(nextLine);
+                    isEmpty = false;
+                }
+            }
+            System.out.println();
+
+            if (isEmpty) {
+                System.out.println("-------------------------------");
+                System.out.println("The list is empty.");
+                System.out.println("-------------------------------\n");
+            } else {
+                clearPalindromeList();
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+
+    }
+
+    public void clearPalindromeList(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Would you like to clear the list? [Y/N]:");
+        String choice = scanner.nextLine().toLowerCase();
+
+        switch (choice){
+            case "y":{
+                try(FileWriter writer = new FileWriter(fileName,false)){
+                    System.out.println("\n-------------------------------");
+                    System.out.println("The list contents have been fully removed.");
+                    System.out.println("-------------------------------\n");
+                    writer.flush();
+                    break;
+                } catch (IOException e){
+                    System.out.println("Error: " + e);
+                }
+            }
+            case "n": {
+                System.out.println("\n-------------------------------");
+                System.out.println("File checker terminated");
+                System.out.println("-------------------------------\n");
+                break;
+            }
+        }
+    }
 }

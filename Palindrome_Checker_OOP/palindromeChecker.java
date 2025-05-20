@@ -1,6 +1,10 @@
 package Palindrome_Checker_OOP;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+
 public class palindromeChecker {
     private final String input;
     private String isPalindrome;
@@ -64,9 +68,22 @@ public class palindromeChecker {
         //equalsIgnoreCase makes small or capital letters have the same value as long as they are the "same letter/alphabet"
         if ((originalInput.toString()).equalsIgnoreCase(reverseInput.toString())) {
             isPalindrome = "is a palindrome";
+
+            File file = new File("palindromeList.txt");
+            String absolutePath = file.getAbsolutePath();
+            try{
+                FileWriter writer = new FileWriter(absolutePath, true);
+                writer.write(input + "\n");
+                writer.flush();
+                writer.close();
+            } catch(IOException e){
+                System.out.println("Error: " + e);
+            }
+
         } else {
             isPalindrome = "is NOT a palindrome";
         }
+
     }
 
     @Override

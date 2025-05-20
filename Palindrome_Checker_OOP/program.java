@@ -1,5 +1,6 @@
 package Palindrome_Checker_OOP;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class program {
@@ -8,16 +9,18 @@ public class program {
 
         boolean palindromeSystem = true;
         while(palindromeSystem){
+            System.out.println("Palindrome Checker System");
             System.out.println("Choose a category: \n");
             System.out.println("1. Check a word/phrase");
             System.out.println("2. Check an entire file");
-            System.out.println("3. Exit\n");
-            System.out.println("Select an option [1-3]: ");
+            System.out.println("3. View previously found palindromes");
+            System.out.println("4. Exit\n");
+            System.out.println("Select an option [1-4]: ");
             String input = scanner.nextLine();
 
             try{
                 int inputTrial = Integer.parseInt(input);
-                if(inputTrial < 1 || inputTrial > 3){
+                if(inputTrial < 1 || inputTrial > 4){
                     System.out.println("Invalid Choice. Please try again\n");
                 }
                 switch (inputTrial){
@@ -52,6 +55,10 @@ public class program {
                         break;
                     }
                     case 3:{
+                        filePalindromeChecker checker = new filePalindromeChecker("palindromeList.txt");
+                        checker.palindromeList();
+                        break;
+                    } case 4:{
                         System.out.println("\n-------------------------------");
                         System.out.println("Program will now terminate..");
                         System.out.println("Goodbye!");
