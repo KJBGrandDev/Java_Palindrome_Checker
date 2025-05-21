@@ -19,7 +19,11 @@ public class palindromeChecker {
 
     public void inputRegexChecker(){
         String regEx = "^[a-zA-Z]+$";
+        //A for loop that extracts the parts of a string one by one using the charAt(i) position
 
+        //We start at the count of 0 which is equivalent to the first character of the string then it increment the value until it reaches the condition of "i less than input.length() which had the value of "last character position + 1" value and serves as a gate
+
+        //It also checks whether the current "char" is an alphabet between a-z or if it's a capital, A-Z, using the regular Expression method (regEx)
         for(int i = 0; i < input.length(); i++){
             if(String.valueOf(input.charAt(i)).matches(regEx)){
                 originalInput.add(String.valueOf(input.charAt(i)));
@@ -29,7 +33,12 @@ public class palindromeChecker {
 
     public void reverseRegexChecker(){
         String regEx = "^[a-zA-Z]+$";
+        //A for loop that extracts the characters of a string in reverse manner
+        //The loop starts at the end side of the string by using the string.length() value minus 1
 
+        //Why minus 1? it's because input.length counts the literal count of the string starting from 1 while charAt(i) values count starting from 0 so there's a discrepancy of 1 unit. To solve it, we must decrease the value of the string.length() by 1 so that we can call the last character of the string perfectly
+
+        //It also checks whether the current "char" is an alphabet between a-z or if it's a capital, A-Z, using the regular Expression method (regEx)
         for(int i = input.length() - 1; i >= 0; i--){
             if(String.valueOf(input.charAt(i)).matches(regEx)){
                 reverseInput.add(String.valueOf(input.charAt(i)));
@@ -71,6 +80,8 @@ public class palindromeChecker {
 
             File file = new File("palindromeList.txt");
             String absolutePath = file.getAbsolutePath();
+
+            //If the word is a palindrome, the program will then save the palindrome word inside the "palindromeList" using FileWriter method
             try{
                 FileWriter writer = new FileWriter(absolutePath, true);
                 writer.write(input + "\n");

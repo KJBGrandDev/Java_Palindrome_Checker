@@ -55,6 +55,7 @@ public class filePalindromeChecker {
                 System.out.println("File checker terminated");
                 System.out.println("-------------------------------\n");
                 break;
+                //If the choices is neither "y" or "n", the program then it sends an error message
             default:
                 System.out.println("\n-------------------------------");
                 System.out.println("Invalid choice. File checker terminated");
@@ -65,6 +66,7 @@ public class filePalindromeChecker {
     public void palindromeChecker() {
         InputStream is = getFileStream();
 
+        //Checks if the file currently exist
         if (is == null) {
             System.out.println("-------------------------------");
             System.out.println("Error: File '" + fileName + "' not found!");
@@ -77,11 +79,13 @@ public class filePalindromeChecker {
             return;
         }
 
+        //Checks if the file is currently empty
         if (isFileEmpty(is)) {
             checkAnotherFile();
             return;
         }
 
+        //Reads the file line by line
         try(InputStream newIs = getClass().getResourceAsStream("/File/" + fileName)) {
             assert newIs != null;
             BufferedReader fileReader = new BufferedReader(new InputStreamReader(newIs));
@@ -89,6 +93,8 @@ public class filePalindromeChecker {
             String line;
             while ((line = fileReader.readLine()) != null) {
                 if(!line.trim().isEmpty()){
+                    //Calls palindromeChecker method "isPalindrome()"
+                    //This method returns whether the string is a palindrome or not
                     palindromeChecker checker = new palindromeChecker(line);
                     System.out.println(line + " = " + checker);
                 }
