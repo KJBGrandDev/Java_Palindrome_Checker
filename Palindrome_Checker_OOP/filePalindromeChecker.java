@@ -93,8 +93,7 @@ public class filePalindromeChecker {
             String line;
             while ((line = fileReader.readLine()) != null) {
                 if(!line.trim().isEmpty()){
-                    //Calls palindromeChecker method "isPalindrome()"
-                    //This method returns whether the string is a palindrome or not
+
                     palindromeChecker checker = new palindromeChecker(line);
                     System.out.println(line + " = " + checker);
                 }
@@ -115,14 +114,11 @@ public class filePalindromeChecker {
 
     public void palindromeList() {
         File file = new File(fileName);
-
         if (!file.exists()) {
             System.out.println("Error: File not found -> " + file.getAbsolutePath());
             return;
         }
-
         try (Scanner scanner = new Scanner(file)) {
-
             System.out.println("\n-------------------------------");
             System.out.println("Checking file contents..");
             System.out.println("-------------------------------\n");
@@ -135,7 +131,6 @@ public class filePalindromeChecker {
                 }
             }
             System.out.println();
-
             if (isEmpty) {
                 System.out.println("-------------------------------");
                 System.out.println("The list is empty.");

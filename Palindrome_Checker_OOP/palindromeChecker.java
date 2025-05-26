@@ -10,11 +10,13 @@ public class palindromeChecker {
     private String isPalindrome;
     private final ArrayList<String> originalInput;
     private final ArrayList<String> reverseInput;
+    private final ArrayList<String> filteredPalindrome;
 
     public palindromeChecker(String input){
         this.input = input;
         this.originalInput = new ArrayList<>();
         this.reverseInput = new ArrayList<>();
+        this.filteredPalindrome = new ArrayList<>();
     }
 
     public void inputRegexChecker(){
@@ -33,15 +35,21 @@ public class palindromeChecker {
 
     public void reverseRegexChecker(){
         String regEx = "^[a-zA-Z]+$";
-        //A for loop that extracts the characters of a string in reverse manner
-        //The loop starts at the end side of the string by using the string.length() value minus 1
 
-        //Why minus 1? it's because input.length counts the literal count of the string starting from 1 while charAt(i) values count starting from 0 so there's a discrepancy of 1 unit. To solve it, we must decrease the value of the string.length() by 1 so that we can call the last character of the string perfectly
-
-        //It also checks whether the current "char" is an alphabet between a-z or if it's a capital, A-Z, using the regular Expression method (regEx)
         for(int i = input.length() - 1; i >= 0; i--){
             if(String.valueOf(input.charAt(i)).matches(regEx)){
                 reverseInput.add(String.valueOf(input.charAt(i)));
+            }
+        }
+    }
+
+    //Added: May,26,2025 - QOL update
+    public void setFilteredPalindrome(){
+        String regEx = "^[a-zA-Z ]+$";
+
+        for(int i = 0; i < input.length(); i++){
+            if (String.valueOf(input.charAt(i)).matches(regEx)){
+                filteredPalindrome.add(String.valueOf(input.charAt(i)));
             }
         }
     }
@@ -50,7 +58,7 @@ public class palindromeChecker {
         //This will return an "error" if the input only contains numbers
         //This is just a regEx example of manually checking input based on its data types and can be erased due to the more robust 2nd regEx checker in line 45
         if(input.matches("[0-9]+$")){
-            isPalindrome = "Error: Input must contain at least one letter";
+            isPalindrome = "Error: Input must contain at least two letters";
             return;
         }
 
@@ -81,16 +89,19 @@ public class palindromeChecker {
             File file = new File("palindromeList.txt");
             String absolutePath = file.getAbsolutePath();
 
-            //If the word is a palindrome, the program will then save the palindrome word inside the "palindromeList" using FileWriter method
             try{
                 FileWriter writer = new FileWriter(absolutePath, true);
-                writer.write(input + "\n");
+                //Filters the input and get the String that makes the Palindrome
+                setFilteredPalindrome();
+                String filtered = String.join("", filteredPalindrome);
+                writer.write("Input: " + input + "\n");
+                writer.write("Palindrome: " + filtered + "\n");
+                writer.write("-----------------------------------\n");
                 writer.flush();
                 writer.close();
             } catch(IOException e){
                 System.out.println("Error: " + e);
             }
-
         } else {
             isPalindrome = "is NOT a palindrome";
         }

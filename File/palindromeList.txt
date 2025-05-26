@@ -1,2 +1,9 @@
-aa
-asa
+Input: maam
+Palindrome: maam
+-----------------------------------
+Input: aaa
+Palindrome: aaa
+-----------------------------------
+Input: /1/2/1/211aaa
+Palindrome: aaa
+-----------------------------------
