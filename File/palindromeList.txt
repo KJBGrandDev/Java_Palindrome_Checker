@@ -7,3 +7,15 @@ Palindrome: aaa
 Input: /1/2/1/211aaa
 Palindrome: aaa
 -----------------------------------
+Input: mam
+Palindrome: mam
+-----------------------------------
+Input: Sore was I ere I saw Eros.
+Palindrome: Sore was I ere I saw Eros
+-----------------------------------
+Input: Red Roses run no risk, sir, on nurses order.
+Palindrome: Red Roses run no risk sir on nurses order
+-----------------------------------
+Input: I, man, am regal; a German am I.
+Palindrome: I man am regal a German am I
+-----------------------------------

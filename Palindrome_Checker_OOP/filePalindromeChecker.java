@@ -168,6 +168,12 @@ public class filePalindromeChecker {
                 System.out.println("-------------------------------\n");
                 break;
             }
+            default: {
+                System.out.println("\n-------------------------------");
+                System.out.println("Error: Input choice Invalid\n");
+                System.out.println("File checker terminated");
+                System.out.println("-------------------------------\n");
+            }
         }
     }
 }
